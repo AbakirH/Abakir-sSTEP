@@ -7,3 +7,31 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+a{
+    text-decoration:none;
+    outline:none;
+}
+
+#nav {
+  width:100vw;
+  height:50px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position:fixed;
+  background-color: #5597b4;  
+  box-shadow: 0 1px 1px #ccc;
+  border-radius: 2px;
+  
+}
+#nav a{
+    color:#fff;
+    text-transform: uppercase;
+
+}
