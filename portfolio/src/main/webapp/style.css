@@ -35,3 +35,58 @@ a{
     text-transform: uppercase;
 
 }
+
+#content{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+  height: 500px;
+  max-width: 110%;
+  width: 100%;
+  height: 85vh;
+  z-index: 2;
+}
+.pic1{
+  width: 75%;
+  background-blend-mode: darken;
+  border-radius: 40%;
+}
+#column1{
+  width: 40%;
+}
+#column2{
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+ justify-content: center;
+  width: 60%;
+}
+#column2>h1{
+  min-width: 50%;
+  font-size: 60px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+#column2>h2{
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+}
+#contact1{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+#contact-links{
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+#contact-links>.button1{
+   color: #5a5af6 ;
+}
+#contact-links>.button1:hover {
+   color: #fa19db;
+   }
+#contact-links>.button:active{
+    color: black;
+}
