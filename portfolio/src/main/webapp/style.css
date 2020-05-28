@@ -1,4 +1,7 @@
-
+*{
+  margin:0%;
+  padding:0%;
+}
 
 a{
     text-decoration:none;
@@ -50,7 +53,7 @@ a{
  flex-direction: column;
  align-content: center;
  justify-content: center;
-  width: 60%;
+ width: 60%;
 }
 #column2>h1{
   min-width: 50%;
