@@ -31,3 +31,13 @@ function  changeTitle(){
       i = 0;
     }
 }
+
+
+
+function playGame(){
+  window.open('https://abakirh.github.io/pokebattle/index.html', '_blank');
+}
+
+function viewGame(){
+  window.open('https://github.com/AbakirH/AbakirH.github.io/blob/master/pokebattle/sketch.js', '_blank');
+}
