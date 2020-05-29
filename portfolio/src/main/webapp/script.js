@@ -15,14 +15,29 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+let titles = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
+let i = 0;
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+setInterval(changeTitle, 3000);
+
+
+function  changeTitle(){
+    $('#titles').fadeTo(300, 0).fadeTo(300, 1);
+    $('#titles').text(titles[i]);
+    
+    i++;
+    if (i === titles.length) {
+      i = 0;
+    }
+}
+
+
+
+function playGame(){
+  window.open('https://abakirh.github.io/pokebattle/index.html', '_blank');
+}
+
+function viewGame(){
+  window.open('https://github.com/AbakirH/AbakirH.github.io/blob/master/pokebattle/sketch.js', '_blank');
 }
