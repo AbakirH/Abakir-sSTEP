@@ -21,7 +21,6 @@ let i = 0;
 
 setInterval(changePositionDisplayed, 3000);
 
-
 function  changePositionDisplayed(){
 	$('#position').fadeTo(300, 0).fadeTo(300, 1); 
     $('#position').text(titles[i]);
@@ -31,8 +30,6 @@ function  changePositionDisplayed(){
       i = 0;
     }
 }
-
-
 
 function playGame(){
   window.open('https://abakirh.github.io/pokebattle/index.html', '_blank');
