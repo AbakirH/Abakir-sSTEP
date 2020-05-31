@@ -16,18 +16,18 @@
  * Adds a random greeting to the page.
  */
 
-let titles = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
+let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 
-setInterval(changeTitle, 3000);
+setInterval(changePositionDisplayed, 3000);
 
 
-function  changeTitle(){
-    $('#titles').fadeTo(300, 0).fadeTo(300, 1);
-    $('#titles').text(titles[i]);
+function  changePositionDisplayed(){
+	$('#position').fadeTo(300, 0).fadeTo(300, 1); 
+    $('#position').text(titles[i]);
     
     i++;
-    if (i === titles.length) {
+    if (i === positions.length) {
       i = 0;
     }
 }
