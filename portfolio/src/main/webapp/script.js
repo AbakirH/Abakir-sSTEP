@@ -23,7 +23,7 @@ setInterval(changePositionDisplayed, 3000);
 
 function  changePositionDisplayed(){
 	$('#position').fadeTo(300, 0).fadeTo(300, 1); 
-    $('#position').text(titles[i]);
+    $('#position').text(positions[i]);
     
     i++;
     if (i === positions.length) {
