@@ -22,7 +22,7 @@ let i = 0;
 setInterval(changePositionDisplayed, 3000);
 
 function  changePositionDisplayed(){
-	$('#position').fadeTo(300, 0).fadeTo(300, 1); 
+    $('#position').fadeTo(300, 0).fadeTo(300, 1); 
     $('#position').text(positions[i]);
     
     i++;
@@ -37,4 +37,10 @@ function playGame(){
 
 function viewGame(){
   window.open('https://github.com/AbakirH/AbakirH.github.io/blob/master/pokebattle/sketch.js', '_blank');
+}
+
+function getGreeting() {
+  fetch('/data').then(response => response.text()).then((name) => {
+    document.getElementById('greeting').innerText = name;
+  });
 }
