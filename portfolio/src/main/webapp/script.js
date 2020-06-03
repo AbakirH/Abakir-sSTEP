@@ -43,4 +43,10 @@ function getGreeting() {
   fetch('/data').then(response => response.text()).then((name) => {
     document.getElementById('greeting').innerText = name;
   });
+}function getJSONData(){
+  fetch('/data')  // sends a request to /my-data-url
+  .then(response => response.json()) // parses the response as JSON
+  .then((message) => { // now we can reference the fields in myObject!
+        
+  });
 }
