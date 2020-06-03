@@ -40,13 +40,26 @@ function viewGame(){
 }
 
 function getGreeting() {
-  fetch('/data').then(response => response.text()).then((name) => {
+  fetch('/data')
+  .then(response => response.text())
+  .then((name) => {
     document.getElementById('greeting').innerText = name;
   });
-}function getJSONData(){
-  fetch('/data')  // sends a request to /my-data-url
-  .then(response => response.json()) // parses the response as JSON
-  .then((message) => { // now we can reference the fields in myObject!
-        
+}
+
+function getJSONData(){
+  fetch('/data')  
+  .then(response => response.json()) 
+  .then((message) => {
+
+      let messageConntainer = document.getElementById("messages");
+      console.log(message[0]);
+
+      for(let i = 0; i < message.length; i++){
+        let text = document.createTextNode(message[i]);
+        messageConntainer.appendChild(text);
+        messageConntainer.appendChild(document.createElement('br'));
+      }
+
   });
 }
