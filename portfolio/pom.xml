@@ -23,6 +23,11 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+  <dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.6</version>
+  </dependency>
   </dependencies>
 
   <build>
@@ -37,6 +42,7 @@
           <!-- TODO: set project ID. -->
           <deploy.projectId>abakir-step-2020</deploy.projectId>
           <deploy.version>1</deploy.version>
+          <automaticRestart>true</automaticRestart>
         </configuration>
       </plugin>
     </plugins>
