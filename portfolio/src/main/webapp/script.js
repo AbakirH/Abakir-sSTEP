@@ -55,9 +55,10 @@ function getJSONData(){
       let messageConntainer = document.getElementById("messages");
 
       for(let i = 0; i < message.length; i++){
+        let pTag = document.createElement('p');
         let text = document.createTextNode(message[i]);
-        messageConntainer.appendChild(text);
-        messageConntainer.appendChild(document.createElement('br'));
+        pTag.appendChild(text);
+        messageConntainer.appendChild(pTag);
       }
 
   });
