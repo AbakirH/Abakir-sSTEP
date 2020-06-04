@@ -68,18 +68,23 @@ function getComment(){
   fetch('/comment')  
   .then(response => response.json()) 
   .then((coments) => {
-
+    checkNumberOfComments(coments);
     let commentContainer = document.getElementById("comments");
-    
+
     coments.forEach((comment) => {
       commentContainer.appendChild(createListElement(comment));
     });
-
+   
   });
 }
-
+function checkNumberOfComments(array){
+  if(array.length > 5 ){
+    array.clear();
+  }
+}
 function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
 }
+
