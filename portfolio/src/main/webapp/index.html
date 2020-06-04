@@ -9,7 +9,7 @@
     <script src="script.js"></script>
     
   </head>
-  <body>
+  <body onload="getComment()">
     <!--nav-->
     <div id="nav">
         <a href="#home">Home</a>
@@ -67,13 +67,16 @@
 
 
     <form action="/comment" method="POST">
-
         <p>Comment:</p>
         <input type="text" name="comment">
         <br/><br/>
-  
         <input type="submit" />
     </form>
+    
+    <div>
+        <h1>Comments posted by the user!</h1>
+        <ul id="comments"></ul>
+    </div>
 
   </body>
 </html>
