@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
   private ArrayList<String> messages = new ArrayList<String>();
 
+  
   @Override
   public void init() {
     messages.add("Hello, how are you?");
