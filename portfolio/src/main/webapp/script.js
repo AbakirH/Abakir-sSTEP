@@ -40,7 +40,26 @@ function viewGame(){
 }
 
 function getGreeting() {
-  fetch('/data').then(response => response.text()).then((name) => {
+  fetch('/data')
+  .then(response => response.text())
+  .then((name) => {
     document.getElementById('greeting').innerText = name;
+  });
+}
+
+function getJSONData(){
+  fetch('/data')  
+  .then(response => response.json()) 
+  .then((message) => {
+
+      let messageConntainer = document.getElementById("messages");
+
+      for(let i = 0; i < message.length; i++){
+        let pTag = document.createElement('p');
+        let text = document.createTextNode(message[i]);
+        pTag.appendChild(text);
+        messageConntainer.appendChild(pTag);
+      }
+
   });
 }
