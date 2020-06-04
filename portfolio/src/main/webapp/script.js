@@ -53,7 +53,6 @@ function getJSONData(){
   .then((message) => {
 
       let messageConntainer = document.getElementById("messages");
-      console.log(message[0]);
 
       for(let i = 0; i < message.length; i++){
         let text = document.createTextNode(message[i]);
