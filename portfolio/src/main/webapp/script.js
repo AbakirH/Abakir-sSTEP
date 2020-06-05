@@ -101,7 +101,6 @@ function loadContacts(){
   });
 }
 
-
 function createContactElement(task) {
   const contactElement = document.createElement('li');
   contactElement.className = 'task';
@@ -109,8 +108,12 @@ function createContactElement(task) {
   const nameElement = document.createElement('span');
   nameElement.innerText = task.name;
 
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
 
   contactElement.appendChild(nameElement);
+  contactElement.appendChild(deleteButtonElement);
 
   return contactElement;
 }
+
