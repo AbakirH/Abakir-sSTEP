@@ -80,13 +80,13 @@
 
     <h1> Contact Form</h1>
     <form method="POST" action="/new-contact">
-        <input type="text" name="name" />
-        <input type="text" name="email" />
-        <input type="text" name="number" />
+        <input type="text" name="name" placeholder="Please enter your name" required="required" data-error="Name is required."/>
+        <input type="email" name="email" placeholder="Please enter your email" required="required" data-error="Valid email is required." />
+        <input type="text" name="number" placeholder="Please enter your number" required="required" data-error="Valid number is required." />
         <br/>
         <button>Submit</button>
     </form>
     <ul id="contact-list"></ul>
-    
+
   </body>
 </html>
