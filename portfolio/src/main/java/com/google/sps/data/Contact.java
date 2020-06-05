@@ -1,6 +1,7 @@
 
 package com.google.sps.data;
 
+// This is the structure of a contact class that would be used to easily access the info in the database
 public final class Contact {
 
     private final String name;
