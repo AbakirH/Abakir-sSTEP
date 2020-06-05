@@ -26,9 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comment")
 public class CommentServlet extends HttpServlet {
-
   private final List<String> comments = new ArrayList<>();
-
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -36,12 +34,14 @@ public class CommentServlet extends HttpServlet {
     String json = new Gson().toJson(comments);
     response.getWriter().println(json);
   }
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String commenttext = getComment(request);
-    comments.add(commenttext);
+    String commentText = getComment(request);
+    comments.add(commenttText);
     response.sendRedirect("/index.html");
   }
+
   private String getComment(HttpServletRequest request) {
     String comment = request.getParameter("comment");
     return comment;
