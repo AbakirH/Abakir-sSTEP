@@ -102,7 +102,7 @@ function loadContacts(){
 }
 function createContactElement(task) {
   const contactElement = document.createElement('li');
-  contactElement.className = 'task';
+  contactElement.className = 'contact';
 
   const nameElement = document.createElement('span');
   nameElement.innerText = task.name;
