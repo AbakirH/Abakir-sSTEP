@@ -105,7 +105,13 @@ function createContactElement(contact) {
   contactElement.className = 'contact';
 
   const nameElement = document.createElement('span');
-  nameElement.innerText = contact.name;
+  nameElement.innerText = "Name: " + contact.name;
+
+  const emailElement = document.createElement('span');
+  emailElement.innerText = "Email: " + contact.email;
+
+  const numberElement = document.createElement('span');
+  numberElement.innerText = "Number: " + contact.number;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
@@ -117,6 +123,8 @@ function createContactElement(contact) {
 
 
   contactElement.appendChild(nameElement);
+  contactElement.appendChild(emailElement);
+  contactElement.appendChild(numberElement);
   contactElement.appendChild(deleteButtonElement);
   
   return contactElement;
