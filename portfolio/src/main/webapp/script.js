@@ -100,7 +100,6 @@ function loadContacts(){
     })
   });
 }
-
 function createContactElement(task) {
   const contactElement = document.createElement('li');
   contactElement.className = 'task';
@@ -110,10 +109,24 @@ function createContactElement(task) {
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteTask(task);
+
+    contactElement.remove();
+  });
+
 
   contactElement.appendChild(nameElement);
   contactElement.appendChild(deleteButtonElement);
-
+  
   return contactElement;
 }
-
+function deleteTask(contact) {
+  const params = new URLSearchParams();
+  params.append('id', contact.id);
+  fetch('/delete-contact', {
+        method: 'POST', 
+        body: params
+        }
+      );
+}
