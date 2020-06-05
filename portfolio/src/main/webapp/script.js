@@ -67,11 +67,11 @@ function getJSONData(){
 function getComment(){
   fetch('/comment')  
   .then(response => response.json()) 
-  .then((coments) => {
-    checkNumberOfComments(coments);
+  .then((comments) => {
+    checkNumberOfComments(comments);
     let commentContainer = document.getElementById("comments");
 
-    coments.forEach((comment) => {
+    comments.forEach((comment) => {
       commentContainer.appendChild(createListElement(comment));
     });
    
