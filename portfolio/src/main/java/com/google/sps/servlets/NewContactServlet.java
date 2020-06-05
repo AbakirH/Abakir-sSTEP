@@ -15,6 +15,18 @@ public class NewContactServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-   //still to be made
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    long number = Long.parseLong(request.getParameter("number"));
+
+    Entity contactEntity = new Entity("Contact");
+    contactEntity.setProperty("name", name);
+    contactEntity.setProperty("email", email);
+    contactEntity.setProperty("number", number);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(contactEntity);
+
+    response.sendRedirect("/index.html");
   }
 }
