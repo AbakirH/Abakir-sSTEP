@@ -38,7 +38,7 @@ public class CommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentText = getComment(request);
-    comments.add(commenttText);
+    comments.add(commentText);
     response.sendRedirect("/index.html");
   }
 
