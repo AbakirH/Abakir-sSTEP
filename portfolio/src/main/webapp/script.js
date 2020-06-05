@@ -100,17 +100,17 @@ function loadContacts(){
     })
   });
 }
-function createContactElement(task) {
+function createContactElement(contact) {
   const contactElement = document.createElement('li');
   contactElement.className = 'contact';
 
   const nameElement = document.createElement('span');
-  nameElement.innerText = task.name;
+  nameElement.innerText = contact.name;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
-    deleteTask(task);
+    deleteTask(contact);
 
     contactElement.remove();
   });
