@@ -40,11 +40,14 @@ public class ListContactsServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
       long number = (long) entity.getProperty("number");
+      long id = entity.getKey().getId();
 
-      Contact contact = new Contact(name, email, number);
+      Contact contact = new Contact(name, email, number,id);
       contacts.add(contact);
     }
     return contacts;
   }
  
 }
+
+
