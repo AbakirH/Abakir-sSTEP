@@ -88,3 +88,29 @@ function createListElement(text) {
   return liElement;
 }
 
+function loadContacts(){
+  fetch('/list-contacts')
+  .then(response => response.json())
+  .then((contacts) => {
+    const taskListElement = document.getElementById('contact-list');
+    console.log(contacts);
+    contacts.forEach((contact) => {
+      taskListElement.appendChild(createContactElement(contact));
+     
+    })
+  });
+}
+
+
+function createContactElement(task) {
+  const contactElement = document.createElement('li');
+  contactElement.className = 'task';
+
+  const nameElement = document.createElement('span');
+  nameElement.innerText = task.name;
+
+
+  contactElement.appendChild(nameElement);
+
+  return contactElement;
+}
