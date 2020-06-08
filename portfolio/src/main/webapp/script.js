@@ -18,6 +18,7 @@
 
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
+let contactIds = [];
 
 setInterval(changePositionDisplayed, 3000);
 
@@ -97,10 +98,12 @@ function loadContacts(){
     contacts.forEach((contact) => {
       taskListElement.appendChild(createContactElement(contact));
      
-    })
+    });
   });
 }
 function createContactElement(contact) {
+  contactIds.push(contact.id);
+
   const contactElement = document.createElement('li');
   contactElement.className = 'contact';
 
@@ -137,4 +140,17 @@ function deleteTask(contact) {
         body: params
         }
       );
+}
+
+function deleteAll() {
+  contactIds.forEach((contact) => {
+    const params = new URLSearchParams();
+    params.append('id', contact);
+    fetch('/delete-contact', {
+          method: 'POST', 
+          body: params
+          }
+        );
+  })
+  location.reload();
 }
