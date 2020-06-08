@@ -101,9 +101,8 @@ function loadContacts(){
 }
 function createContactElement(contact) {
   contactIds.push(contact.id);
-
-  const contactElement = document.createElement('li');
-  contactElement.className = 'contact';
+  
+  liElement.className = 'contact';
 
   const nameElement = document.createElement('span');
   nameElement.innerText = "Name: " + contact.name;
@@ -123,12 +122,12 @@ function createContactElement(contact) {
   });
 
 
-  contactElement.appendChild(nameElement);
-  contactElement.appendChild(emailElement);
-  contactElement.appendChild(numberElement);
-  contactElement.appendChild(deleteButtonElement);
+  liElement.appendChild(nameElement);
+  liElement.appendChild(emailElement);
+  liElement.appendChild(numberElement);
+  liElement.appendChild(deleteButtonElement);
   
-  return contactElement;
+  return liElement;
 }
 function deleteTask(contact) {
   const params = new URLSearchParams();
