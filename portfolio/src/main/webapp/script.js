@@ -17,6 +17,7 @@
  */
 const liElement = document.createElement('li');
 const spanElement = document.createElement('span');
+const ButtonElement = document.createElement('button');
 
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
@@ -105,21 +106,17 @@ function createContactElement(contact) {
   contactIds.push(contact.id);
   
   liElement.className = 'contact';
-
   spanElement.innerText = "Name: " + contact.name + " ";
   spanElement.innerText += "Email: " + contact.email + " ";
   spanElement.innerText += "Number: " + contact.number;
-  
-
-  const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.addEventListener('click', () => {
+  ButtonElement.innerText = 'Delete';
+  ButtonElement.addEventListener('click', () => {
     deleteTask(contact);
 
     contactElement.remove();
   });
   liElement.appendChild(spanElement);
-  liElement.appendChild(deleteButtonElement);
+  liElement.appendChild(ButtonElement);
   
   return liElement;
 }
