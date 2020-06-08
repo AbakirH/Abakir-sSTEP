@@ -79,7 +79,8 @@ function getComment(){
   });
 }
 function checkNumberOfComments(array){
-  if(array.length > 5 ){
+  let commentsMax = 5;  // This is an arbitrary number because I do no want that many comments on my page
+  if(array.length > commentsMax ){
     array.clear();
   }
 }
