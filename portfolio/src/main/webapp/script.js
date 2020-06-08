@@ -15,9 +15,12 @@
 /**
  * Adds a random greeting to the page.
  */
-const liElement = document.createElement('li');
-const spanElement = document.createElement('span');
-const ButtonElement = document.createElement('button');
+const contactLiteral = "contact";
+const nameLiteral = "Name";
+const emailLiteral = "Email";
+const numberLiteral = "Number";
+const deleteLiteral = "Delete";
+const contactPath = "contact-list";
 
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
@@ -88,6 +91,7 @@ function checkNumberOfComments(array){
   }
 }
 function createListElement(text) {
+  const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
 }
@@ -96,29 +100,41 @@ function loadContacts(){
   fetch('/list-contacts')
   .then(response => response.json())
   .then((contacts) => {
-    const taskListElement = document.getElementById('contact-list');
+    const taskListElement = document.getElementById(contactPath);
+    console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createContactElement(contact));
+     
     });
   });
 }
 function createContactElement(contact) {
   contactIds.push(contact.id);
-  
-  liElement.className = 'contact';
-  spanElement.innerText = "Name: " + contact.name + " ";
-  spanElement.innerText += "Email: " + contact.email + " ";
-  spanElement.innerText += "Number: " + contact.number;
-  ButtonElement.innerText = 'Delete';
-  ButtonElement.addEventListener('click', () => {
-    deleteTask(contact);
 
+  const contactElement = document.createElement('li');
+  contactElement.className = contactLiteral;
+
+  const nameElement = document.createElement('span');
+  nameElement.innerText = nameLiteral + ": " + contact.name;
+
+  const emailElement = document.createElement('span');
+  emailElement.innerText = emailLiteral + ": " + contact.email;
+
+  const numberElement = document.createElement('span');
+  numberElement.innerText = numberLiteral + ": " + contact.number;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = deleteLiteral;
+  deleteButtonElement.addEventListener('click', () => {
+    deleteTask(contact);
     contactElement.remove();
   });
-  liElement.appendChild(spanElement);
-  liElement.appendChild(ButtonElement);
+  contactElement.appendChild(nameElement);
+  contactElement.appendChild(emailElement);
+  contactElement.appendChild(numberElement);
+  contactElement.appendChild(deleteButtonElement);
   
-  return liElement;
+  return contactElement;
 }
 function deleteTask(contact) {
   const params = new URLSearchParams();
