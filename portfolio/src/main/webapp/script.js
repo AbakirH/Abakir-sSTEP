@@ -85,7 +85,6 @@ function checkNumberOfComments(array){
   }
 }
 function createListElement(text) {
-  
   liElement.innerText = text;
   return liElement;
 }
@@ -95,10 +94,8 @@ function loadContacts(){
   .then(response => response.json())
   .then((contacts) => {
     const taskListElement = document.getElementById('contact-list');
-    console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createContactElement(contact));
-     
     });
   });
 }
