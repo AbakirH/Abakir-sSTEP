@@ -106,15 +106,10 @@ function createContactElement(contact) {
   
   liElement.className = 'contact';
 
+  spanElement.innerText = "Name: " + contact.name + " ";
+  spanElement.innerText += "Email: " + contact.email + " ";
+  spanElement.innerText += "Number: " + contact.number;
   
-  spanElement.innerText = "Name: " + contact.name;
-  liElement.appendChild(spanElement);
-
-  spanElement.innerText = "Email: " + contact.email;
-  liElement.appendChild(spanElement);
-
-  spanElement.innerText = "Number: " + contact.number;
-  liElement.appendChild(spanElement);
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
@@ -123,7 +118,7 @@ function createContactElement(contact) {
 
     contactElement.remove();
   });
-
+  liElement.appendChild(spanElement);
   liElement.appendChild(deleteButtonElement);
   
   return liElement;
