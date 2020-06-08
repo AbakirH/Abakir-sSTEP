@@ -16,6 +16,8 @@
  * Adds a random greeting to the page.
  */
 const liElement = document.createElement('li');
+const spanElement = document.createElement('span');
+
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 let contactIds = [];
@@ -104,14 +106,15 @@ function createContactElement(contact) {
   
   liElement.className = 'contact';
 
-  const nameElement = document.createElement('span');
-  nameElement.innerText = "Name: " + contact.name;
+  
+  spanElement.innerText = "Name: " + contact.name;
+  liElement.appendChild(spanElement);
 
-  const emailElement = document.createElement('span');
-  emailElement.innerText = "Email: " + contact.email;
+  spanElement.innerText = "Email: " + contact.email;
+  liElement.appendChild(spanElement);
 
-  const numberElement = document.createElement('span');
-  numberElement.innerText = "Number: " + contact.number;
+  spanElement.innerText = "Number: " + contact.number;
+  liElement.appendChild(spanElement);
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
@@ -121,10 +124,6 @@ function createContactElement(contact) {
     contactElement.remove();
   });
 
-
-  liElement.appendChild(nameElement);
-  liElement.appendChild(emailElement);
-  liElement.appendChild(numberElement);
   liElement.appendChild(deleteButtonElement);
   
   return liElement;
