@@ -15,7 +15,7 @@
 /**
  * Adds a random greeting to the page.
  */
-
+const liElement = document.createElement('li');
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 let contactIds = [];
@@ -85,7 +85,7 @@ function checkNumberOfComments(array){
   }
 }
 function createListElement(text) {
-  const liElement = document.createElement('li');
+  
   liElement.innerText = text;
   return liElement;
 }
