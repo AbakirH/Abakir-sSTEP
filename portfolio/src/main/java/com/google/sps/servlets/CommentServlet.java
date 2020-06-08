@@ -43,8 +43,17 @@ public class CommentServlet extends HttpServlet {
   }
 
   private String getComment(HttpServletRequest request) {
-    String comment = request.getParameter("comment");
-    return comment;
+    try{
+      if(request.getParameter("comment") == null){
+        throw new Exception("Wrong Parameter path"); 
+      }
+      String comment = request.getParameter("comment");
+      return comment;
+    }catch(Exception path){
+      String comment = "Please check your code, because the path to get the comment is wrong";
+      return comment;
+    }
+    
   }
     
 }
