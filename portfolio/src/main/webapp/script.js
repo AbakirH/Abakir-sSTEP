@@ -15,16 +15,22 @@
 /**
  * Adds a random greeting to the page.
  */
+const nameOfForm = "contact";
+const nameOfContact = "Name";
+const emailOfContact = "Email";
+const numberOfContact = "Number";
+const deleteButton = "Delete";
+const idOfContactList = "contact-list";
 
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
+let contactIds = [];
 
 setInterval(changePositionDisplayed, 3000);
 
 function  changePositionDisplayed(){
     $('#position').fadeTo(300, 0).fadeTo(300, 1); 
     $('#position').text(positions[i]);
-    
     i++;
     if (i === positions.length) {
       i = 0;
@@ -62,4 +68,92 @@ function getJSONData(){
       }
 
   });
+}
+
+function getComment(){
+  fetch('/comment')  
+  .then(response => response.json()) 
+  .then((comments) => {
+    checkNumberOfComments(comments);
+    let commentContainer = document.getElementById("comments");
+
+    comments.forEach((comment) => {
+      commentContainer.appendChild(createListElement(comment));
+    });
+  });
+}
+function checkNumberOfComments(array){
+  let commentsMax = 5;  // This is an arbitrary number because I do no want that many comments on my page
+  if(array.length > commentsMax ){
+    array.clear();
+  }
+}
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+function loadContacts(){
+  fetch('/list-contacts')
+  .then(response => response.json())
+  .then((contacts) => {
+    const taskListElement = document.getElementById(idOfContactList);
+    console.log(contacts);
+    contacts.forEach((contact) => {
+      taskListElement.appendChild(createcontactListElement(contact));
+    });
+  });
+}
+
+function createcontactListElement(contact) {
+  contactIds.push(contact.id);
+
+  const contactListElement = document.createElement('li');
+  contactListElement.className = nameOfForm;
+
+  const nameOfPerson = document.createElement('span');
+  nameOfPerson.innerText = nameOfContact + ": " + contact.name;
+
+  const emailOfPerson = document.createElement('span');
+  emailOfPerson.innerText = emailOfContact + ": " + contact.email;
+
+  const numberOfPerson = document.createElement('span');
+  numberOfPerson.innerText = numberOfContact + ": " + contact.number;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = deleteButton;
+  deleteButtonElement.addEventListener('click', () => {
+    deleteTask(contact);
+    contactListElement.remove();
+  });
+  contactListElement.appendChild(nameOfPerson);
+  contactListElement.appendChild(emailOfPerson);
+  contactListElement.appendChild(numberOfPerson);
+  contactListElement.appendChild(deleteButtonElement);
+  
+  return contactListElement;
+}
+
+function deleteTask(contact) {
+  const params = new URLSearchParams();
+  params.append('id', contact.id);
+  fetch('/delete-contact', {
+        method: 'POST', 
+        body: params
+        }
+      );
+}
+
+function deleteAll() {
+  contactIds.forEach((contact) => {
+    const params = new URLSearchParams();
+    params.append('id', contact);
+    fetch('/delete-contact', {
+          method: 'POST', 
+          body: params
+          }
+        );
+  })
+  location.reload();
 }

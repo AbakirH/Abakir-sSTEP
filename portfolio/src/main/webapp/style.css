@@ -104,3 +104,36 @@ a{
   width:45%;
   height: 45%;
 }
+
+#contact-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+#contact-list {
+  width: 100vw;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.contact {
+  display: flex;
+  flex-direction: row;
+  border: thin solid black;
+  width: 50vw;
+  height: 30px;
+}
+.input{
+  width: 50vw;
+}
+#submitContact{
+  width: 30vw;
+}
+.contact span {
+  flex-grow: 1;
+}
