@@ -31,7 +31,6 @@ setInterval(changePositionDisplayed, 3000);
 function  changePositionDisplayed(){
     $('#position').fadeTo(300, 0).fadeTo(300, 1); 
     $('#position').text(positions[i]);
-    
     i++;
     if (i === positions.length) {
       i = 0;
@@ -81,7 +80,6 @@ function getComment(){
     comments.forEach((comment) => {
       commentContainer.appendChild(createListElement(comment));
     });
-   
   });
 }
 function checkNumberOfComments(array){
@@ -104,10 +102,10 @@ function loadContacts(){
     console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createContactElement(contact));
-     
     });
   });
 }
+
 function createContactElement(contact) {
   contactIds.push(contact.id);
 
@@ -136,6 +134,7 @@ function createContactElement(contact) {
   
   return contactElement;
 }
+
 function deleteTask(contact) {
   const params = new URLSearchParams();
   params.append('id', contact.id);
