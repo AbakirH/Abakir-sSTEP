@@ -15,12 +15,12 @@
 /**
  * Adds a random greeting to the page.
  */
-const contactLiteral = "contact";
-const nameLiteral = "Name";
-const emailLiteral = "Email";
-const numberLiteral = "Number";
-const deleteLiteral = "Delete";
-const contactPath = "contact-list";
+const nameOfForm = "contact";
+const nameOfContact = "Name";
+const emailOfContact = "Email";
+const numberOfContact = "Number";
+const deleteButton = "Delete";
+const idOfContactList = "contact-list";
 
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
@@ -98,7 +98,7 @@ function loadContacts(){
   fetch('/list-contacts')
   .then(response => response.json())
   .then((contacts) => {
-    const taskListElement = document.getElementById(contactPath);
+    const taskListElement = document.getElementById(idOfContactList);
     console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createContactElement(contact));
@@ -110,19 +110,19 @@ function createContactElement(contact) {
   contactIds.push(contact.id);
 
   const contactElement = document.createElement('li');
-  contactElement.className = contactLiteral;
+  contactElement.className = nameOfForm;
 
   const nameElement = document.createElement('span');
-  nameElement.innerText = nameLiteral + ": " + contact.name;
+  nameElement.innerText = nameOfContact + ": " + contact.name;
 
   const emailElement = document.createElement('span');
-  emailElement.innerText = emailLiteral + ": " + contact.email;
+  emailElement.innerText = emailOfContact + ": " + contact.email;
 
   const numberElement = document.createElement('span');
-  numberElement.innerText = numberLiteral + ": " + contact.number;
+  numberElement.innerText = numberOfContact + ": " + contact.number;
 
   const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = deleteLiteral;
+  deleteButtonElement.innerText = deleteButton;
   deleteButtonElement.addEventListener('click', () => {
     deleteTask(contact);
     contactElement.remove();
