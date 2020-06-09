@@ -44,12 +44,11 @@ public class CommentServlet extends HttpServlet {
 
   private String getComment(HttpServletRequest request) {
     String comment = ""; 
-    try{
+    try {
       comment = request.getParameter("comment");
       return comment;
-    }catch(NullPointerException error){
+    } catch (NullPointerException error) {
       comment = "Please check your code, because the path to get the comment is null";
-      
     }
     return comment;
   }
