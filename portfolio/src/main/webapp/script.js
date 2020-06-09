@@ -101,38 +101,38 @@ function loadContacts(){
     const taskListElement = document.getElementById(idOfContactList);
     console.log(contacts);
     contacts.forEach((contact) => {
-      taskListElement.appendChild(createContactElement(contact));
+      taskListElement.appendChild(createcontactListElement(contact));
     });
   });
 }
 
-function createContactElement(contact) {
+function createcontactListElement(contact) {
   contactIds.push(contact.id);
 
-  const contactElement = document.createElement('li');
-  contactElement.className = nameOfForm;
+  const contactListElement = document.createElement('li');
+  contactListElement.className = nameOfForm;
 
-  const nameElement = document.createElement('span');
-  nameElement.innerText = nameOfContact + ": " + contact.name;
+  const nameOfPerson = document.createElement('span');
+  nameOfPerson.innerText = nameOfContact + ": " + contact.name;
 
-  const emailElement = document.createElement('span');
-  emailElement.innerText = emailOfContact + ": " + contact.email;
+  const emailOfPerson = document.createElement('span');
+  emailOfPerson.innerText = emailOfContact + ": " + contact.email;
 
-  const numberElement = document.createElement('span');
-  numberElement.innerText = numberOfContact + ": " + contact.number;
+  const numberOfPerson = document.createElement('span');
+  numberOfPerson.innerText = numberOfContact + ": " + contact.number;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = deleteButton;
   deleteButtonElement.addEventListener('click', () => {
     deleteTask(contact);
-    contactElement.remove();
+    contactListElement.remove();
   });
-  contactElement.appendChild(nameElement);
-  contactElement.appendChild(emailElement);
-  contactElement.appendChild(numberElement);
-  contactElement.appendChild(deleteButtonElement);
+  contactListElement.appendChild(nameOfPerson);
+  contactListElement.appendChild(emailOfPerson);
+  contactListElement.appendChild(numberOfPerson);
+  contactListElement.appendChild(deleteButtonElement);
   
-  return contactElement;
+  return contactListElement;
 }
 
 function deleteTask(contact) {
