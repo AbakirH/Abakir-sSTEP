@@ -167,6 +167,20 @@ function fetchBlobstoreUrlAndShowImage() {
     const messageForm = document.getElementById('my-form');
     messageForm.action = imageUploadUrl;
     messageForm.classList.remove('hidden');
+    getImageSRC();
+  });
+}
+
+function getImageSRC() {
+  fetch('/my-form-handler')
+  .then(response => response.json())
+  .then((images) => {
+    console.log(images);
+    const divImageId = document.getElementById("myImg");
+    const uploadedImageFile = document.createElement('IMG');
+    uploadedImageFile.src =images[0];
+    divImageId.appendChild(uploadedImageFile);
+    return false;
   });
 }
 
