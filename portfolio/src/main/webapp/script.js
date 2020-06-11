@@ -178,6 +178,7 @@ function getImageSRC() {
     console.log(images);
     const divImageId = document.getElementById("myImg");
     const uploadedImageFile = document.createElement('IMG');
+    //Their should only ever be one element inside the array allowing for multiple submits
     uploadedImageFile.src =images[0];
     divImageId.appendChild(uploadedImageFile);
     return false;
