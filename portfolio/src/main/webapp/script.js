@@ -100,7 +100,6 @@ function loadContacts(){
   .then(response => response.json())
   .then((contacts) => {
     const taskListElement = document.getElementById(idOfContactList);
-    console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createcontactListElement(contact));
     });
@@ -177,7 +176,8 @@ function getImageSRC() {
   .then(response => response.json())
   .then((images) => {
     if(images.length == checkIfAnElementIsEmpty ){
-      console.log(images);
+      //This is not an error, just to show the user that it is waiting for an image to be uploaded
+      throw new Error('Image is not uploaded yet');
     }else{
       const divImageId = document.getElementById("myImg");
       const uploadedImageFile = document.createElement('IMG');
@@ -185,6 +185,9 @@ function getImageSRC() {
       uploadedImageFile.src =images[onlyElementInArray];
       divImageId.appendChild(uploadedImageFile);
     }
+  })
+  .catch(warning => {
+    console.log('Waiting', warning);
   });
 }
 
