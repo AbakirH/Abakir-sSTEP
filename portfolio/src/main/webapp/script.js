@@ -25,6 +25,7 @@ const idOfContactList = "contact-list";
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 let contactIds = [];
+let onlyElementInArray = 0; 
 
 setInterval(changePositionDisplayed, 3000);
 
@@ -179,7 +180,7 @@ function getImageSRC() {
     const divImageId = document.getElementById("myImg");
     const uploadedImageFile = document.createElement('IMG');
     //Their should only ever be one element inside the array allowing for multiple submits
-    uploadedImageFile.src =images[0];
+    uploadedImageFile.src =images[onlyElementInArray];
     divImageId.appendChild(uploadedImageFile);
     return false;
   });
