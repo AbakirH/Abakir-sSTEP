@@ -26,7 +26,7 @@ let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Design
 let i = 0;
 let contactIds = [];
 let onlyElementInArray = 0; 
-
+let checkIfAnElementIsEmpty = 0;
 setInterval(changePositionDisplayed, 3000);
 
 function  changePositionDisplayed(){
@@ -176,13 +176,15 @@ function getImageSRC() {
   fetch('/my-form-handler')
   .then(response => response.json())
   .then((images) => {
-    console.log(images);
-    const divImageId = document.getElementById("myImg");
-    const uploadedImageFile = document.createElement('IMG');
-    //Their should only ever be one element inside the array allowing for multiple submits
-    uploadedImageFile.src =images[onlyElementInArray];
-    divImageId.appendChild(uploadedImageFile);
-    return false;
+    if(images.length == checkIfAnElementIsEmpty ){
+      console.log(images);
+    }else{
+      const divImageId = document.getElementById("myImg");
+      const uploadedImageFile = document.createElement('IMG');
+      //Their should only ever be one element inside the array allowing for multiple submits
+      uploadedImageFile.src =images[onlyElementInArray];
+      divImageId.appendChild(uploadedImageFile);
+    }
   });
 }
 
