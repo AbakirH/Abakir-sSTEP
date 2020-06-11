@@ -43,14 +43,21 @@ import com.google.gson.Gson;
 @WebServlet("/my-form-handler")
 public class ImageFormHandlerServlet extends HttpServlet {
   private List<String> images = new ArrayList<>();
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    images.add(getUploadedFileUrl(request, "image"));
-    
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(images));
+  }
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    String imageUrl = getUploadedFileUrl(request, "image");
+    images.add(imageUrl);
+    PrintWriter out = response.getWriter();
+    out.println(imageUrl);
+
   }
 
   /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
