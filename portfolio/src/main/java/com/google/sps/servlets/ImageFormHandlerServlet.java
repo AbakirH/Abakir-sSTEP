@@ -55,9 +55,7 @@ public class ImageFormHandlerServlet extends HttpServlet {
 
     String imageUrl = getUploadedFileUrl(request, "image");
     images.add(imageUrl);
-    PrintWriter out = response.getWriter();
-    out.println(imageUrl);
-
+    response.sendRedirect("/index.html");
   }
 
   /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
