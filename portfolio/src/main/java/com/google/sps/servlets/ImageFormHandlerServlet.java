@@ -59,7 +59,9 @@ public class ImageFormHandlerServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     String imageUrl = getUploadedFileUrl(request, "image");
-    images.add(imageUrl);
+    if(imageUrl != null){
+      images.add(imageUrl);
+    }
 
     if(images.size() >= maxNumberOfImages){
       images.remove(0);
