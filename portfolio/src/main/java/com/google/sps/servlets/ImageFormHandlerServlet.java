@@ -43,15 +43,18 @@ import com.google.gson.Gson;
 @WebServlet("/my-form-handler")
 public class ImageFormHandlerServlet extends HttpServlet {
   private List<String> images = new ArrayList<>();
-  //Variable to be used to allow multiple images to be uploaded,
-  // and allow the image on the page to refresh 
-  private int maxNumberOfImages = 2; 
+  // Variable to be used to allow multiple images to be uploaded,
+  // and allow the image on the page to refresh, but only one image
+  //is ever stored in the array 
+  private int maxNumberOfImages = 2;
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(images));
   }
+  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
