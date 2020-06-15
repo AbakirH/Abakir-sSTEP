@@ -175,7 +175,7 @@ function getImageSRC() {
   fetch('/my-form-handler')
   .then(response => response.json())
   .then((images) => {
-    if(images.length == checkIfAnElementIsEmpty ){
+    if(images.length === checkIfAnElementIsEmpty ){
       //This is not an error, just to show the user that it is waiting for an image to be uploaded
       throw new Error('Image is not uploaded yet');
     }else{
