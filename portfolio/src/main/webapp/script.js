@@ -181,7 +181,8 @@ function getImageSRC() {
     }else{
       const divImageId = document.getElementById("myImg");
       const uploadedImageFile = document.createElement('IMG');
-      //Their should only ever be one element inside the array allowing for multiple submits
+      //There should only ever be one element inside the array
+      //To allow for resubmission of new images, the old image gets deleted from the servlet
       uploadedImageFile.src =images[onlyElementInArray];
       divImageId.appendChild(uploadedImageFile);
     }
