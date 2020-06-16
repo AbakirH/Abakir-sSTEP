@@ -74,7 +74,8 @@ public class ImageFormHandlerServlet extends HttpServlet {
   private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
-    List<BlobKey> blobKeys = blobs.get("image");
+    List<BlobKey> blobKeys = new ArrayList<BlobKey>();
+    blobKeys = blobs.get("image");
     // User submitted form without selecting a file, so we can't get a URL. (dev server)
     if (blobKeys == null || blobKeys.isEmpty()) {
       return null;
