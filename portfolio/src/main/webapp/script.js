@@ -25,7 +25,6 @@ const idOfContactList = "contact-list";
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 let contactIds = [];
-let onlyElementInArray = 0; 
 let checkIfAnElementIsEmpty = 0;
 setInterval(changePositionDisplayed, 3000);
 
