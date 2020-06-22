@@ -20,6 +20,7 @@ import java.util.*;
 public final class FindMeetingQuery {
   private List<TimeRange> unavailableTimes = new ArrayList<>();
   private Collection<TimeRange> availableTimesForAMeeting = new ArrayList<>();
+  
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     List<TimeRange> busyTimes = new ArrayList<>();
     if(events.isEmpty()){
@@ -33,10 +34,13 @@ public final class FindMeetingQuery {
     availableTimesForAttendees(busyTimes, request);
     return availableTimesForAMeeting;
   }
+
   public List<TimeRange> checkWhenEventsOccur(Collection<Event> events, MeetingRequest request){
     List<TimeRange> eventTimes = new ArrayList<>();
     for(Event eventItem: events ){
       for(String attendee: request.getAttendees()){
+        // This if statement makes sure the attendee of the event 
+        // is the same one as the requested attendee 
         if(eventItem.getAttendees().contains(attendee)){
           eventTimes.add(eventItem.getWhen());
         }
@@ -44,37 +48,52 @@ public final class FindMeetingQuery {
     }
     return eventTimes;
   }
+
   public List<TimeRange> checkIfTimesOverlap(List<TimeRange> busyTimes){
+    // This boolean variable should ony be changed when, an event's
+    //TimeRange overlaps, another TimeRange in the array
     boolean checkIfItemWasAdded = false;
     for(int i = 0; i < busyTimes.size(); i++){
       TimeRange currentTime = busyTimes.get(i);
       TimeRange nextTimeInList;
       if(i+1 < busyTimes.size()){
         nextTimeInList =  busyTimes.get(i+1);
+        //Their is two different types of events overlapping each other
         if(currentTime.overlaps(nextTimeInList)){
+          // This check if an event starts, when another is already taking place, 
+          // but ends after the first event ends
           if(currentTime.end() > nextTimeInList.start() && currentTime.end() < nextTimeInList.end() ){
             unavailableTimes.add(TimeRange.fromStartEnd(currentTime.start(), nextTimeInList.end(), false));
             checkIfItemWasAdded = true;
-          }else if(currentTime.start() <= nextTimeInList.start() &&  currentTime.end() >= nextTimeInList.end() ){
+          }
+          // This checks if an event has another event taking place within the start 
+          // and end time of the event that is being compared
+          else if(currentTime.start() <= nextTimeInList.start() &&  currentTime.end() >= nextTimeInList.end() ){
             unavailableTimes.add(TimeRange.fromStartEnd(currentTime.start(), currentTime.end(), false));
             checkIfItemWasAdded = true;
           }
       }else{
         unavailableTimes.add(busyTimes.get(i));
        }
-      }else if(!checkIfItemWasAdded){
+      }
+      // If the appropriate Time was already added, we do not want to evaluate
+      // this if statement, and is why we use the ! symbol, to make the statement false  
+      else if(!checkIfItemWasAdded){ 
         unavailableTimes.add(busyTimes.get(i));
         checkIfItemWasAdded = false;
       }
    }
    return unavailableTimes;
   }
+
   public Collection<TimeRange> availableTimesForAttendees(List<TimeRange> busyTimes,MeetingRequest request) {
     int startingTime = TimeRange.START_OF_DAY;
+    
     if(busyTimes.isEmpty()){
       availableTimesForAMeeting = Arrays.asList(TimeRange.WHOLE_DAY);
       return availableTimesForAMeeting;
     }
+
     for(int i = 0; i < busyTimes.size(); i++){
       TimeRange time = busyTimes.get(i);
       if(startingTime + request.getDuration() <= time.start()){
