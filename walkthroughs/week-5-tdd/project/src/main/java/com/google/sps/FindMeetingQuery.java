@@ -18,46 +18,33 @@ import java.sql.Time;
 import java.util.*;  
 
 public final class FindMeetingQuery {
+  private List<TimeRange> unavailableTimes = new ArrayList<>();
+  private Collection<TimeRange> availableTimesForAMeeting = new ArrayList<>();
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<TimeRange> newEvents = new ArrayList<>();
-    List<Integer> allTimes = new ArrayList<>();
-    List<TimeRange> busyTimes = new ArrayList<>();;
-    allTimes.add(TimeRange.START_OF_DAY);
+    List<TimeRange> busyTimes = new ArrayList<>();
     if(events.isEmpty()){
       if(request.getDuration() > TimeRange.WHOLE_DAY.duration()){
         return Arrays.asList();
       }
       return Arrays.asList(TimeRange.WHOLE_DAY);
     }
+    busyTimes = checkWhenEventsOccur(events,request);
+    busyTimes = checkIfTimesOverlap(busyTimes);
+    availableTimesForAttendees(busyTimes, request);
+    return availableTimesForAMeeting;
+  }
+  public List<TimeRange> checkWhenEventsOccur(Collection<Event> events, MeetingRequest request){
+    List<TimeRange> eventTimes = new ArrayList<>();
     for(Event eventItem: events ){
       for(String attendee: request.getAttendees()){
         if(eventItem.getAttendees().contains(attendee)){
-          busyTimes.add(eventItem.getWhen());
+          eventTimes.add(eventItem.getWhen());
         }
       }
     }
-
-    int startingTime = TimeRange.START_OF_DAY;
-    int endingTime;
-    busyTimes = checkIfTimesOverlap(busyTimes);
-    if(busyTimes.isEmpty()){
-      return Arrays.asList(TimeRange.WHOLE_DAY);
-    }
-    for(int i = 0; i < busyTimes.size(); i++){
-      TimeRange time = busyTimes.get(i);
-      if(startingTime + request.getDuration() <= time.start()){
-        newEvents.add(TimeRange.fromStartEnd(startingTime, time.start(), false));
-      }
-      startingTime = time.end();
-      if(i+1 >= busyTimes.size() && startingTime + request.getDuration() < TimeRange.END_OF_DAY){
-        newEvents.add(TimeRange.fromStartEnd(startingTime, TimeRange.END_OF_DAY, true));
-      }
-    }
-    return newEvents;
+    return eventTimes;
   }
-
   public List<TimeRange> checkIfTimesOverlap(List<TimeRange> busyTimes){
-    List<TimeRange> unavailableTimes = new ArrayList<>();
     boolean checkIfItemWasAdded = false;
     for(int i = 0; i < busyTimes.size(); i++){
       TimeRange currentTime = busyTimes.get(i);
@@ -81,6 +68,24 @@ public final class FindMeetingQuery {
       }
    }
    return unavailableTimes;
+  }
+  public Collection<TimeRange> availableTimesForAttendees(List<TimeRange> busyTimes,MeetingRequest request) {
+    int startingTime = TimeRange.START_OF_DAY;
+    if(busyTimes.isEmpty()){
+      availableTimesForAMeeting = Arrays.asList(TimeRange.WHOLE_DAY);
+      return availableTimesForAMeeting;
+    }
+    for(int i = 0; i < busyTimes.size(); i++){
+      TimeRange time = busyTimes.get(i);
+      if(startingTime + request.getDuration() <= time.start()){
+        availableTimesForAMeeting.add(TimeRange.fromStartEnd(startingTime, time.start(), false));
+      }
+      startingTime = time.end();
+      if(i+1 >= busyTimes.size() && startingTime + request.getDuration() < TimeRange.END_OF_DAY){
+        availableTimesForAMeeting.add(TimeRange.fromStartEnd(startingTime, TimeRange.END_OF_DAY, true));
+      }
+    }
+    return availableTimesForAMeeting;
   }
 }
 
