@@ -14,10 +14,73 @@
 
 package com.google.sps;
 
-import java.util.Collection;
+import java.sql.Time;
+import java.util.*;  
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    Collection<TimeRange> newEvents = new ArrayList<>();
+    List<Integer> allTimes = new ArrayList<>();
+    List<TimeRange> busyTimes = new ArrayList<>();;
+    allTimes.add(TimeRange.START_OF_DAY);
+    if(events.isEmpty()){
+      if(request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+        return Arrays.asList();
+      }
+      return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+    for(Event eventItem: events ){
+      for(String attendee: request.getAttendees()){
+        if(eventItem.getAttendees().contains(attendee)){
+          busyTimes.add(eventItem.getWhen());
+        }
+      }
+    }
+
+    int startingTime = TimeRange.START_OF_DAY;
+    int endingTime;
+    busyTimes = checkIfTimesOverlap(busyTimes);
+    if(busyTimes.isEmpty()){
+      return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+    for(int i = 0; i < busyTimes.size(); i++){
+      TimeRange time = busyTimes.get(i);
+      if(startingTime + request.getDuration() <= time.start()){
+        newEvents.add(TimeRange.fromStartEnd(startingTime, time.start(), false));
+      }
+      startingTime = time.end();
+      if(i+1 >= busyTimes.size() && startingTime + request.getDuration() < TimeRange.END_OF_DAY){
+        newEvents.add(TimeRange.fromStartEnd(startingTime, TimeRange.END_OF_DAY, true));
+      }
+    }
+    return newEvents;
+  }
+
+  public List<TimeRange> checkIfTimesOverlap(List<TimeRange> busyTimes){
+    List<TimeRange> unavailableTimes = new ArrayList<>();
+    boolean checkIfItemWasAdded = false;
+    for(int i = 0; i < busyTimes.size(); i++){
+      TimeRange currentTime = busyTimes.get(i);
+      TimeRange nextTimeInList;
+      if(i+1 < busyTimes.size()){
+        nextTimeInList =  busyTimes.get(i+1);
+        if(currentTime.overlaps(nextTimeInList)){
+          if(currentTime.end() > nextTimeInList.start() && currentTime.end() < nextTimeInList.end() ){
+            unavailableTimes.add(TimeRange.fromStartEnd(currentTime.start(), nextTimeInList.end(), false));
+            checkIfItemWasAdded = true;
+          }else if(currentTime.start() <= nextTimeInList.start() &&  currentTime.end() >= nextTimeInList.end() ){
+            unavailableTimes.add(TimeRange.fromStartEnd(currentTime.start(), currentTime.end(), false));
+            checkIfItemWasAdded = true;
+          }
+      }else{
+        unavailableTimes.add(busyTimes.get(i));
+       }
+      }else if(!checkIfItemWasAdded){
+        unavailableTimes.add(busyTimes.get(i));
+        checkIfItemWasAdded = false;
+      }
+   }
+   return unavailableTimes;
   }
 }
+
