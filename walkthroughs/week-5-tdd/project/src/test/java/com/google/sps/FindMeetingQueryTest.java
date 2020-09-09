@@ -121,6 +121,7 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
 
+
   @Test
   public void overlappingEvents() {
     // Have an event for each person, but have their events overlap. We should only see two options.
@@ -146,6 +147,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+
 
   @Test
   public void nestedEvents() {
@@ -222,6 +224,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+
 
   @Test
   public void ignoresPeopleNotAttending() {
