@@ -25,7 +25,7 @@ const idOfContactList = "contact-list";
 let positions = [ 'Freelance Web Developer', 'Robotics Builder', 'Graphic Designer', 'Entrepreneur' ];
 let i = 0;
 let contactIds = [];
-
+let checkIfAnElementIsEmpty = 0;
 setInterval(changePositionDisplayed, 3000);
 
 function  changePositionDisplayed(){
@@ -99,7 +99,6 @@ function loadContacts(){
   .then(response => response.json())
   .then((contacts) => {
     const taskListElement = document.getElementById(idOfContactList);
-    console.log(contacts);
     contacts.forEach((contact) => {
       taskListElement.appendChild(createcontactListElement(contact));
     });
@@ -157,3 +156,38 @@ function deleteAll() {
   })
   location.reload();
 }
+
+function fetchBlobstoreUrlAndShowImage() {
+  fetch('/blobstore-upload-url')
+  .then((response) => {
+    return response.text();
+  })
+  .then((imageUploadUrl) => {
+    const messageForm = document.getElementById('my-form');
+    messageForm.action = imageUploadUrl;
+    messageForm.classList.remove('hidden');
+    getImageSRC();
+  });
+}
+
+function getImageSRC() {
+  fetch('/my-form-handler')
+  .then(response => response.json())
+  .then((images) => {
+    if(images.length === checkIfAnElementIsEmpty ){
+      //This is not an error, just to show the user that it is waiting for an image to be uploaded
+      throw new Error('Image is not uploaded yet');
+    }else{
+      const divImageId = document.getElementById("myImg");
+      const uploadedImageFile = document.createElement('IMG');
+      //There should only ever be one element inside the array
+      //To allow for resubmission of new images, the old image gets deleted from the servlet
+      uploadedImageFile.src =images[0];
+      divImageId.appendChild(uploadedImageFile);
+    }
+  })
+  .catch(warning => {
+    console.log('Waiting', warning);
+  });
+}
+

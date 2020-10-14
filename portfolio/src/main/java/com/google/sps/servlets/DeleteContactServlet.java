@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// when the user presses the delete button to remove that element from the database
+// When the user presses the delete button it removes that element from the database
 @WebServlet("/delete-contact")
 public class DeleteContactServlet extends HttpServlet {
 
